@@ -3,8 +3,8 @@
 	import { setContext, onMount } from "svelte";
 	import { getMotion } from "./utils.js";
 	import { themes } from "./config.js";
-	import ONSHeader from "./layout/ONSHeader.svelte";
-	import ONSFooter from "./layout/ONSFooter.svelte";
+	//import ONSHeader from "./layout/ONSHeader.svelte";
+	//import ONSFooter from "./layout/ONSFooter.svelte";
 	import Header from "./layout/Header.svelte";
 	import Section from "./layout/Section.svelte";
 	import Media from "./layout/Media.svelte";
@@ -46,7 +46,7 @@
 	const mapstyle = "https://bothness.github.io/ons-basemaps/data/style-omt.json";
 	const mapbounds = {
 		uk: [
-			[-9, 49 ],
+			[-9, 30 ],
 			[ 2, 61 ]
 		]
 	};
@@ -241,7 +241,7 @@
 	});
 </script>
 
-<ONSHeader filled={true} center={false} />
+<!--<ONSHeader filled={true} center={false} />-->
 
 <Header bgcolor="#206095" bgfixed={true} theme="dark" center={false} short={true}>
 	<h1>This is the title of the article</h1>
@@ -288,20 +288,23 @@
 </Section>
 
 {#if data.region.indicators}
-<Media
-	col="medium"
-	caption="Source: ONS mid-year population estimates."
->
+
 	<div class="chart-sml">
 		<BarChart
 			data={[...data.region.indicators].sort((a, b) => a.pop - b.pop)}
 			xKey="pop" yKey="name"
 			snapTicks={false}
-			xFormatTick={d => (d / 1e6)} xSuffix="m"
+			xFormatTick={d => (d / 1e6)} 
+			xSuffix="m"
+			color="lightgrey"
+			hover={true}
+			colorHover="blue"
+			select={true}
+			colorSelect="blue"
+			overlayFill={true}
 			height={350} padding={{top: 0, bottom: 15, left: 140, right: 0}}
-			area={false} title="Population by region/nation, 2020"/>
+			area={true} title="Population by region/nation, 2020"/>
 	</div>
-</Media>
 {/if}
 
 <Divider/>
@@ -580,7 +583,7 @@
 	</p>
 </Section>
 
-<ONSFooter />
+<!--<ONSFooter />-->
 
 <style>
 	/* Styles specific to elements within the demo */
@@ -603,9 +606,9 @@
 	.chart-sml {
 		font-size: 0.85em;
 	}
-	/* The properties below make the media DIVs grey, for visual purposes in demo */
+	/* The properties below make the media DIVs grey, for visual purposes in demo 
 	.media {
-		background-color: #f0f0f0;
+		background-color: #00ff00;
 		display: -webkit-box;
 		display: -ms-flexbox;
 		display: flex;
@@ -617,6 +620,6 @@
 		-ms-flex-pack: center;
 		justify-content: center;
 		text-align: center;
-		color: #aaa;
-	}
+		color: #0a0;
+	} */
 </style>
